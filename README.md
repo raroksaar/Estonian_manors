@@ -1,0 +1,1 @@
+Uses Leaflet.js to show Estonian manors, based on https://www.mois.ee. Clicking anywhere on map shows geo-coordinates and provides a Google maps link with street view being useful as well as current pictures of the site
