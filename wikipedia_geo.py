@@ -6,9 +6,11 @@ wikipedia.set_lang("et")
 
 # read these from file derived from the portal site,
 # after manual testing:
-portal_link= "https://www.mois.ee/jarva/albu.shtml"
-manor = "Albu mõis"
-longName ="rüütlimõis, Järva-Madise kihelkonnas Järvamaal"
+#https://www.mois.ee/harju/alu.shtml	Alu	 (Allo) — rüütlimõis 	 Rapla kihelkonnas Harjumaal
+
+portal_link= "https://www.mois.ee/harju/alu.shtml"
+manor = "Alu mõis"
+longName = "rüütlimõis 	 Rapla kihelkonnas Harjumaal"
 
 # wikipedia page object is created
 page_object = wikipedia.page(manor)
@@ -19,11 +21,11 @@ print('Title: '+ placeName)
 print('first 10 links: ')
 print(page_object.coordinates)
 
-url =page_object.url
-print(url)
+wikiurl =page_object.url
+print(wikiurl)
 
-url = '<a href="' + portal_link + '>Mõisa Poortal - Estonian Manors</a>'
-placeName = placeName + "<br>" + url
+manorurl = '<a href="' + portal_link + '>Mõisa Poortal - Estonian Manors</a>'
+placeName = placeName + "<br>" + manorurl
 
 coords = str(page_object.coordinates)
 
