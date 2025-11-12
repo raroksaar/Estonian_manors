@@ -168,20 +168,19 @@ var exactloc = {
 
     "type": "FeatureCollection",
     "features": [
-	    {
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-					27.129707, 58.603866
-
-                ]
-            },
-            "type": "Feature",
-            "properties": {
-                "popupContent": 'Alatskivi loss<br><a href="https://www.mois.ee/tartu/alatskivi.shtml">Mõisa Poortal - Estonian Manors</a>'
-            },
-            "id": 51
-        },
+//	    {
+ //           "geometry": {
+ //               "type": "Point",
+ //               "coordinates": [
+//					27.129707, 58.603866
+//                ]
+//            },
+//            "type": "Feature",
+//            "properties": {
+//                "popupContent": 'Alatskivi loss<br><a href="https://www.mois.ee/tartu/alatskivi.shtml">Mõisa Poortal - Estonian Manors</a>'
+//            },
+//            "id": 51
+//        },
 
         {
             "geometry": {
@@ -198,9 +197,6 @@ var exactloc = {
             "id": 51
         },
         {
-			//	var aaspere = L.marker([59.4225, 26.138889]).addTo(map)
-		//.bindPopup('<b>Aaspere rüütlimõis</b><br><a href="https://www.mois.ee/viru/aaspere.shtml">Mõisa Poortal - Estonian Manors</a>');
-
             "geometry": {
                 "type": "Point",
                 "coordinates": [
@@ -261,10 +257,10 @@ var exactloc = {
 			
 		},
 		
-		{
-			"geometry": {"coordinates": [25.47661, 58.850228], "type": "Point"}, "properties": {"popupContent": 'Kirna mõis<br><a href="https://www.mois.ee/jarva/kirna.shtml">Mõisa Poortal - Estonian Manors</a>'}, "type": "Feature"
+		//{
+		//	"geometry": {"coordinates": [25.47661, 58.850228], "type": "Point"}, "properties": {"popupContent": 'Kirna mõis<br><a //href="https://www.mois.ee/jarva/kirna.shtml">Mõisa Poortal - Estonian Manors</a>'}, "type": "Feature"
 			
-		},
+		//},
 			{"geometry": {"coordinates": [25.6592, 59.1533], "type": "Point"}, "properties": {"Country: ": "Eesti", "popupContent": 'Albu mõis<br><a href="https://www.mois.ee/jarva/albu.shtml">Mõisa Poortal - Estonian Manors</a><br><a href="https://et.wikipedia.org/wiki/Albu_m%C3%B5is">Vikipeedia</a>'}, "type": "Feature"},
 
 			{"geometry": {"coordinates": [24.765067, 59.023431], "type": "Point"}, "properties": {"Country: ": "Eesti", "popupContent": 'Alu rüütlimõis Rapla kihelkonnas Harjumaal<br><a href="https://www.mois.ee/harju/alu.shtml">Mõisa Poortal - Estonian Manors</a>'}, "type": "Feature"}			
