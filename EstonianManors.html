@@ -1,8 +1,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A map of Estonian manors made with Leaflet javascript.">
-    <meta name="author" content="Richard Aroksaar">
+    <meta name="description" content="A brief description of the webpage for search engines.">
+    <meta name="author" content="Your Name">
     <title>Estonian map project</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file -->
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon for the browser tab -->
@@ -27,64 +27,69 @@
 	Valitud Eesti mõisad - Selected Estonian manors 
 	</H1>
     <H2>
-	based on <a href="https://www.mois.ee">Eesti Mõisa Poortal - Estonian manors</a>
+	Põhineb - based on: <a href="https://www.mois.ee">Eesti Mõisa Poortal - Estonian manors</a>
 	<br>
-	made with Leaflet Javascript
+	Valmistatud - made with: Leaflet Javascript
 	</H2>
 
-<div id="map" style="width: 1200px; height: 750px;"></div>
+<div id="map" style="width: 1200px; height: 800px;"></div>
 <script src="places-geojson.js" type="text/javascript"></script>
 
 <script>
-	const map = L.map('map').setView([58.60, 24.85], 8);
+	const map = L.map('map').setView([58.845017, 25.548706], 8);
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a><a href="https://www.mois.ee">| Eesti mõisaportaal</a></a>'
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
 	//const inputValue = document.getElementById("loc").innerHTML;
 	const inputValue = "59.434358,24.742334";
-
+	
 	var tallinn = L.marker([59.434358,24.742334]).addTo(map)
 		.bindPopup('<b>Tallinn</b><br />');
 		
-	const popup = L.popup();
-//	function onMapClick(e) {
-//		popup
-//			.setLatLng(e.latlng)
-//			.setContent(`You clicked the map at ${e.latlng.toString()}`)
-//			.openOn(map);
-//	}
+	const popup = L.popup()
+		.setLatLng([59.434358,24.742334])
+		.setContent('Old Town.');
+		//.openOn(map);
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent(`You clicked the map at ${e.latlng.toString()}`)
+			.openOn(map);
+	}
+
+
 	var googlelink = "";
 	var coords = "";
 	var link ="";
 	var url ="";
-	map.on('click', function(e) {
-		 coords = e.latlng.toString().substring(7,e.latlng.toString().length-1);
+      map.on('click', function(e) {
+	     coords = e.latlng.toString().substring(7,e.latlng.toString().length-1);
 		 url = 'https://www.google.com/maps/place/' + coords;
 		 link = '<a href="' + url + '" >Google maps link</a>';
 		 googlelink = coords + '<br>' + link;
-	  });
+      });
 		
 	function onMapClick(e) {
 		popup
 			.setLatLng(e.latlng)
 			.setContent(googlelink)
+			//.setContent(`You clicked the map at:<br> (${e.latlng.toString()}<br>=====`)
 			.openOn(map)
 	}
 	map.on('click', onMapClick);
-	
 
 
-	function onEachFeature(feature, layer) {
-		// does this feature have a property named popupContent?
-		if (feature.properties && feature.properties.popupContent) {
-			layer.bindPopup(feature.properties.popupContent);
-		}
-	}
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+    }
+}
 
-
-	const largeCircleLayer = L.geoJSON([largecircle], {
+	const approximateLayer = L.geoJSON([approximate], {
 		style(feature) {
 			return feature.properties && feature.properties.style;
 		},
@@ -95,7 +100,7 @@
 			return L.circleMarker(latlng, {
 				radius: 7,
 				fillColor: 'white',
-				color: 'blue',
+				color: 'black',
 				weight: 2,
 				opacity: 5,
 				fillOpacity: 0.2
@@ -135,6 +140,33 @@
 		onEachFeature
 	}).addTo(map);
 	
+
+
+	const knightsicon = L.icon({
+		iconUrl: 'livonian_cross.bmp',
+		iconSize: [20, 25],
+		iconAnchor: [18, 20],
+		popupAnchor: [0, -28]
+	});
+	
+//	L.marker([58.995311, 24.719238], {icon: knightsicon}).addTo(map);
+//	L.marker([58.659799, 24.724731], {icon: knightsicon}).addTo(map);	
+	
+	
+	
+	var knightsLayer = L.geoJSON(knights, {
+		pointToLayer(feature, latlng) {
+			return L.marker(latlng, {icon: knightsicon});
+		},
+		onEachFeature
+	}).addTo(map);
+
+
+
+
+
 </script>
+
+
 
 </body>
