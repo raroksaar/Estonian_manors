@@ -29,7 +29,7 @@
     <H2>
 	Põhineb - based on: <a href="https://www.mois.ee">Eesti Mõisa Poortal - Estonian manors</a>
 	<br>
-	Valmistatud - made with: Leaflet Javascript
+	Valmistatud - made with: <a href="https://leafletjs.com/">Leaflet Javascript</a>
 	</H2>
 
 <div id="map" style="width: 1200px; height: 800px;"></div>
@@ -43,40 +43,51 @@
 	}).addTo(map);
 
 	//const inputValue = document.getElementById("loc").innerHTML;
-	const inputValue = "59.434358,24.742334";
-	
-	var tallinn = L.marker([59.434358,24.742334]).addTo(map)
-		.bindPopup('<b>Tallinn</b><br />');
-		
-	const popup = L.popup()
-		.setLatLng([59.434358,24.742334])
-		.setContent('Old Town.');
-		//.openOn(map);
+	//const inputValue = "59.434358,24.742334";
 
-	function onMapClick(e) {
-		popup
-			.setLatLng(e.latlng)
-			.setContent(`You clicked the map at ${e.latlng.toString()}`)
-			.openOn(map);
-	}
+	const eesti_icon = L.icon({
+		iconUrl: 'flag_of_Estonia.png',
+		iconSize: [25, 20],
+		iconAnchor: [18, 20],
+		popupAnchor: [0, -28]
+	});	
+	
+	const tallinn = L.marker([59.433765, 24.744194],{icon: eesti_icon}).addTo(map)
+		.bindPopup('<b>Tallinn Vabaduse väljak  - Freedom Square<br><a href="../help.html">Abi -- Help</b></a><br>');
+	
+	const popup = L.popup()
+	//	.setLatLng([59.434358,24.742334])
+	//	.setContent('Old Town.');
+
+//	function onMapClick(e) {
+//		popup
+//			.setLatLng(e.latlng)
+//			.setContent(`You clicked the map at ${e.latlng.toString()}`)
+//			.openOn(map);
+//	}
 
 
 	var googlelink = "";
 	var coords = "";
 	var link ="";
 	var url ="";
+	
       map.on('click', function(e) {
 	     coords = e.latlng.toString().substring(7,e.latlng.toString().length-1);
 		 url = 'https://www.google.com/maps/place/' + coords;
-		 link = '<a href="' + url + '" >Google maps link</a>';
+		 link = '<a href="' + url + '" >Google maps</a>';
 		 googlelink = coords + '<br>' + link;
-      });
+		 coords = coords.replace(', ','~');
+		 bingurl = 'https://www.bing.com/maps/search?cp=' + coords + '&lvl=15';
+	     binglink = '<a href="' + bingurl + '" >Bing maps</a>';
+
 		
+      });
+	
 	function onMapClick(e) {
 		popup
 			.setLatLng(e.latlng)
-			.setContent(googlelink)
-			//.setContent(`You clicked the map at:<br> (${e.latlng.toString()}<br>=====`)
+			.setContent(googlelink + '<br>' + binglink )
 			.openOn(map)
 	}
 	map.on('click', onMapClick);
@@ -112,9 +123,7 @@ function onEachFeature(feature, layer) {
 		style(feature) {
 			return feature.properties && feature.properties.style;
 		},
-
 		onEachFeature,
-
 		pointToLayer(feature, latlng) {
 			return L.circleMarker(latlng, {
 				radius: 4,
@@ -139,20 +148,20 @@ function onEachFeature(feature, layer) {
 
 		onEachFeature
 	}).addTo(map);
-	
-
 
 	const knightsicon = L.icon({
-		iconUrl: 'livonian_cross.bmp',
+		iconUrl: 'livonian_cross_q.bmp',
 		iconSize: [20, 25],
 		iconAnchor: [18, 20],
 		popupAnchor: [0, -28]
 	});
 	
-//	L.marker([58.995311, 24.719238], {icon: knightsicon}).addTo(map);
-//	L.marker([58.659799, 24.724731], {icon: knightsicon}).addTo(map);	
-	
-	
+	const knightsicon_true = L.icon({
+		iconUrl: 'livonian_cross_plain.bmp',
+		iconSize: [20, 25],
+		iconAnchor: [18, 20],
+		popupAnchor: [0, -28]
+	});	
 	
 	var knightsLayer = L.geoJSON(knights, {
 		pointToLayer(feature, latlng) {
@@ -160,8 +169,28 @@ function onEachFeature(feature, layer) {
 		},
 		onEachFeature
 	}).addTo(map);
+	
+	var knightsLayer_true = L.geoJSON(knights_true, {
+		pointToLayer(feature, latlng) {
+			return L.marker(latlng, {icon: knightsicon_true});
+		},
+		onEachFeature
+	}).addTo(map);
 
-
+	
+	const kunglaicon = L.icon({
+		iconUrl: 'sweden_flag.bmp',
+		iconSize: [25, 20],
+		iconAnchor: [18, 20],
+		popupAnchor: [0, -28]
+	});
+	
+	var kunglaLayer = L.geoJSON(kungla, {
+		pointToLayer(feature, latlng) {
+			return L.marker(latlng, {icon: kunglaicon});
+		},
+		onEachFeature
+	}).addTo(map);
 
 
 
@@ -170,3 +199,28 @@ function onEachFeature(feature, layer) {
 
 
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
